@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CD_Vault.Models"
+             xmlns:pages="clr-namespace:CD_Vault.Pages"
+             x:Class="CD_Vault.Pages.CollectionPage"
+             x:DataType="pages:CollectionPage"
+             Title="Gyűjtemény">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Label Text="Gyűjteményed" Style="{StaticResource Headline}" />
+            <Label Text="Adj hozzá új CD-t vagy kezeld a meglévőket." Style="{StaticResource SubHeadline}" />
+
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Padding="20" Spacing="12">
+                    <Label Text="Új CD hozzáadása" Style="{StaticResource SectionTitle}" />
+                    <Entry Placeholder="Album címe" Text="{Binding TitleInput}" />
+                    <Entry Placeholder="Előadó" Text="{Binding ArtistInput}" />
+                    <Entry Placeholder="Műfaj" Text="{Binding GenreInput}" />
+                    <Entry Placeholder="Kiadás éve" Keyboard="Numeric" Text="{Binding YearInput}" />
+                    <Editor Placeholder="Megjegyzés" AutoSize="TextChanges" Text="{Binding NotesInput}" />
+                    <Button Text="Mentés a gyűjteménybe" Clicked="OnAddClicked" />
+                    <Label Text="{Binding FormMessage}" Style="{StaticResource SectionSubtitle}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Mentett CD-k" Style="{StaticResource SectionTitle}" />
+
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Border Style="{StaticResource CardBorder}">
+                        <VerticalStackLayout Padding="16" Spacing="6">
+                            <Label Text="Még nincs egyetlen CD sem." Style="{StaticResource SectionSubtitle}" />
+                            <Label Text="Használd a fenti űrlapot vagy a Felfedezés oldalt." Style="{StaticResource SectionSubtitle}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CdItem">
+                        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+                            <Grid Padding="16" ColumnDefinitions="60,*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="4">
+                                <Border Grid.RowSpan="2" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0" StrokeShape="RoundRectangle 12" Padding="8" VerticalOptions="Center">
+                                    <Label Text="CD" FontAttributes="Bold" TextColor="{StaticResource SecondaryDarkText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
+                                <Button Grid.Column="2" Grid.RowSpan="2" Text="Törlés" Style="{StaticResource GhostButton}" Clicked="OnDeleteClicked" CommandParameter="{Binding .}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
