@@ -1,10 +1,13 @@
-﻿namespace CD_Vault
+using CD_Vault.Pages;
+
+namespace CD_Vault;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        Routing.RegisterRoute(nameof(CollectionPage), typeof(CollectionPage));
+        Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
     }
 }
