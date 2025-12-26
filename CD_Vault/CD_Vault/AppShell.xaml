@@ -3,7 +3,7 @@
     x:Class="CD_Vault.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:CD_Vault.Pages"
+    xmlns:pages="clr-namespace:CD_Vault"
     Shell.FlyoutBehavior="Disabled"
     Title="CD Vault">
 
