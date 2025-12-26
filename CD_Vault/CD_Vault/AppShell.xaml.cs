@@ -1,13 +1,14 @@
 using CD_Vault.Pages;
 
-namespace CD_Vault;
-
-public partial class AppShell : Shell
+namespace CD_Vault
 {
     public AppShell()
     {
-        InitializeComponent();
-        Routing.RegisterRoute(nameof(CollectionPage), typeof(CollectionPage));
-        Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
+        public AppShell()
+        {
+            InitializeComponent();
+            Routing.RegisterRoute(nameof(CollectionPage), typeof(CollectionPage));
+            Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
+        }
     }
 }

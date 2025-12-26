@@ -2,7 +2,6 @@
 using CD_Vault.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;
 
 namespace CD_Vault
 {
