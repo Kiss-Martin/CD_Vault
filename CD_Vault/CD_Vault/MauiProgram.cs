@@ -1,6 +1,7 @@
 ﻿using CD_Vault.Pages;
 using CD_Vault.Services;
 using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
 
 namespace CD_Vault
 {
@@ -11,6 +12,7 @@ namespace CD_Vault
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
