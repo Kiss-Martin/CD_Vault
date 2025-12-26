@@ -1,25 +1,48 @@
-﻿namespace CD_Vault
+using CD_Vault.Pages;
+using CD_Vault.Services;
+
+namespace CD_Vault;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private readonly CdDatabase _database;
+    private int _collectionCount;
+
+    public MainPage(CdDatabase database)
     {
-        int count = 0;
+        InitializeComponent();
+        _database = database;
+        BindingContext = this;
+    }
 
-        public MainPage()
+    public int CollectionCount
+    {
+        get => _collectionCount;
+        set
         {
-            InitializeComponent();
-        }
+            if (_collectionCount == value)
+            {
+                return;
+            }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            _collectionCount = value;
+            OnPropertyChanged();
         }
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        CollectionCount = await _database.GetCountAsync();
+    }
+
+    private async void OnCollectionClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(CollectionPage));
+    }
+
+    private async void OnDiscoverClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(DiscoverPage));
+    }
 }
