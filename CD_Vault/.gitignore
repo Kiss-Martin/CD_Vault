@@ -1,0 +1,110 @@
+# Visual Studio / IDEs
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.ide
+*.sln.iml
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+artifacts/
+publish/
+*.exe
+*.dll
+*.app
+*.appx
+*.msi
+*.nupkg
+*.zip
+
+# Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# NuGet
+packages/
+.nuget/
+packages.lock.json
+
+# Dotnet temporary files
+project.lock.json
+project.fragment.lock.json
+dotnet-*
+
+# Logs
+*.log
+
+# User-specific files
+*.userprefs
+*.rsuser
+*.userosscache
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# VS Code
+.history/
+
+# Local development settings
+local.settings.json
+launchSettings.json
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Azure / Functions
+secrets.json
+
+# MAUI / Xamarin / Mobile specific
+Platforms/**/bin/
+Platforms/**/obj/
+obj/**/maui*
+# Android / Gradle
+local.properties
+.gradle/
+gradle/
+**/android/local.properties
+*.keystore
+*.jks
+*.p12
+*.pfx
+# iOS / Mac
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+*.xcodeproj/project.xcworkspace/
+# Mac universal build artifacts
+*.app.dSYM/
+
+# Certificates / signing keys
+*.pfx
+*.key
+*.pem
+
+# IDE-specific metadata and caches
+.vsconfig
+.vscode-test/
+
+# Package managers
+node_modules/
+wwwroot/lib/
+
+# Misc
+*.swp
+*.bak
+*.tmp
+*.orig
+
+# End of file
