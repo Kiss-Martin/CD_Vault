@@ -18,7 +18,7 @@
             </Grid>
         </Border>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+        <ActivityIndicator IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" />
         <Label Text="{Binding StatusMessage}" Style="{StaticResource SectionSubtitle}" />
 
         <CollectionView ItemsSource="{Binding Results}" SelectionMode="None">

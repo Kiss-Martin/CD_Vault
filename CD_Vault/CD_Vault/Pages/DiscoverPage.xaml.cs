@@ -9,7 +9,7 @@ public partial class DiscoverPage : ContentPage
     private readonly AlbumSearchService _searchService;
     private readonly CdDatabase _database;
     private string _query = string.Empty;
-    private bool _isBusy;
+    private bool _isSearching;
     private string _statusMessage = string.Empty;
 
     public DiscoverPage(AlbumSearchService searchService, CdDatabase database)
@@ -37,17 +37,17 @@ public partial class DiscoverPage : ContentPage
         }
     }
 
-    public bool IsBusy
+    public bool IsSearching
     {
-        get => _isBusy;
+        get => _isSearching;
         set
         {
-            if (_isBusy == value)
+            if (_isSearching == value)
             {
                 return;
             }
 
-            _isBusy = value;
+            _isSearching = value;
             OnPropertyChanged();
         }
     }
@@ -75,7 +75,7 @@ public partial class DiscoverPage : ContentPage
             return;
         }
 
-        IsBusy = true;
+        IsSearching = true;
         StatusMessage = "Keresés folyamatban...";
 
         try
@@ -97,7 +97,7 @@ public partial class DiscoverPage : ContentPage
         }
         finally
         {
-            IsBusy = false;
+            IsSearching = false;
         }
     }
 
