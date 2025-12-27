@@ -7,21 +7,23 @@
              x:DataType="pages:DiscoverPage"
              Title="Felfedezés">
 
-    <VerticalStackLayout Padding="24" Spacing="18">
-        <Label Text="Fedezz fel albumokat" Style="{StaticResource Headline}" />
-        <Label Text="Keress az iTunes katalógusában és add hozzá a kedvenceket." Style="{StaticResource SubHeadline}" />
+    <Grid Padding="24" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="18">
+        <VerticalStackLayout Grid.Row="0" Spacing="8">
+            <Label Text="Fedezz fel albumokat" Style="{StaticResource Headline}" />
+            <Label Text="Keress az iTunes katalógusában és add hozzá a kedvenceket." Style="{StaticResource SubHeadline}" />
+        </VerticalStackLayout>
 
-        <Border Style="{StaticResource CardBorder}">
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}">
             <Grid Padding="16" ColumnDefinitions="*,Auto" ColumnSpacing="12">
                 <Entry Placeholder="Pl. Depeche Mode" Text="{Binding Query}" />
                 <Button Grid.Column="1" Text="Keresés" Clicked="OnSearchClicked" />
             </Grid>
         </Border>
 
-        <ActivityIndicator IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" />
-        <Label Text="{Binding StatusMessage}" Style="{StaticResource SectionSubtitle}" />
+        <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" />
+        <Label Grid.Row="3" Text="{Binding StatusMessage}" Style="{StaticResource SectionSubtitle}" />
 
-        <CollectionView ItemsSource="{Binding Results}" SelectionMode="None">
+        <CollectionView Grid.Row="4" ItemsSource="{Binding Results}" SelectionMode="None">
             <CollectionView.EmptyView>
                 <Border Style="{StaticResource CardBorder}">
                     <VerticalStackLayout Padding="16" Spacing="6">
@@ -42,5 +44,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
