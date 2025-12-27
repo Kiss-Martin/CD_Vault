@@ -1,8 +1,9 @@
 using CD_Vault.Pages;
+using Microsoft.Maui.Controls;
 
 namespace CD_Vault
 {
-    public AppShell()
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
