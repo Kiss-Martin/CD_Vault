@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CD_Vault.Pages;
+using CD_Vault.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CD_Vault
 {
@@ -14,6 +17,13 @@ namespace CD_Vault
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<CdDatabase>();
+            builder.Services.AddHttpClient<AlbumSearchService>();
+
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<CollectionPage>();
+            builder.Services.AddTransient<DiscoverPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
