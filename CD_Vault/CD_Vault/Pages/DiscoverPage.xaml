@@ -47,9 +47,15 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:AlbumSearchResult">
                     <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
-                        <Grid Padding="16" ColumnDefinitions="80,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
-                            <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
-                            <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                            <Grid Padding="16" ColumnDefinitions="60,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+                                <Border StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18"/>
+                                    </Border.StrokeShape>
+                                    <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
                             <Button Grid.Column="2" Grid.RowSpan="2" Text="{Binding ActionLabel}" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}" />
                         </Grid>
