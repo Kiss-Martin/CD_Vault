@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CD_Vault.Models"
+             xmlns:pages="clr-namespace:CD_Vault.Pages"
+             x:Class="CD_Vault.Pages.DiscoverPage"
+             x:DataType="pages:DiscoverPage"
+             Title="Felfedezés">
+
+    <Grid Padding="24" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="18">
+        <VerticalStackLayout Grid.Row="0" Spacing="8">
+            <Label Text="Fedezz fel albumokat" Style="{StaticResource Headline}" />
+            <Label Text="Keress az iTunes katalógusában és add hozzá a kedvenceket." Style="{StaticResource SubHeadline}" />
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}">
+            <Grid Padding="16" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <Entry Placeholder="Pl. Depeche Mode" Text="{Binding Query}" />
+                <Button Grid.Column="1" Text="Keresés" Clicked="OnSearchClicked" />
+            </Grid>
+        </Border>
+
+        <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" />
+        <Label Grid.Row="3" Text="{Binding StatusMessage}" Style="{StaticResource SectionSubtitle}" />
+
+        <CollectionView Grid.Row="4" ItemsSource="{Binding Results}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Border Style="{StaticResource CardBorder}">
+                    <VerticalStackLayout Padding="16" Spacing="6">
+                        <Label Text="Indíts keresést a találatokhoz." Style="{StaticResource SectionSubtitle}" />
+                    </VerticalStackLayout>
+                </Border>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AlbumSearchResult">
+                    <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+                        <Grid Padding="16" ColumnDefinitions="80,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+                            <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
+                            <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
+                            <Button Grid.Column="2" Grid.RowSpan="2" Text="Mentés" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
