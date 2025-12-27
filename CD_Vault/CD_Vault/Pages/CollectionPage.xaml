@@ -27,7 +27,7 @@
 
             <Label Text="Mentett CD-k" Style="{StaticResource SectionTitle}" />
 
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
                 <CollectionView.EmptyView>
                     <Border Style="{StaticResource CardBorder}">
                         <VerticalStackLayout Padding="16" Spacing="6">
@@ -47,9 +47,8 @@
                                     <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
                                 </Border>
                                 <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
-                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
                                 <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
-                                <Button Grid.Column="2" Grid.RowSpan="2" Text="Törlés" Style="{StaticResource SecondaryButton}" Clicked="OnDeleteClicked" CommandParameter="{Binding .}" />
+                                <Button Grid.Column="2" Grid.RowSpan="2" Text="Törlés" Style="{StaticResource RemoveButton}" Clicked="OnDeleteClicked" CommandParameter="{Binding .}" />
                             </Grid>
                         </Border>
                     </DataTemplate>

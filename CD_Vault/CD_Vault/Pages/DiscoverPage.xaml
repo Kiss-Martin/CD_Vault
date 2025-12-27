@@ -55,10 +55,16 @@
                                     <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
                                 </Border>
                                 <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
-                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+
                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
-                            <Button Grid.Column="2" Grid.RowSpan="2" Text="{Binding ActionLabel}" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}" />
-                        </Grid>
+                                <Button Grid.Column="2" Grid.RowSpan="2" Text="{Binding ActionLabel}" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding IsInCollection}" Value="True">
+                                            <Setter Property="Style" Value="{StaticResource RemoveButton}" />
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

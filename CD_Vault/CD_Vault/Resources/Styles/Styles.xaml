@@ -217,6 +217,11 @@
         <Setter Property="TextColor" Value="{StaticResource SecondaryDarkText}" />
     </Style>
 
+    <Style TargetType="Button" x:Key="RemoveButton">
+        <Setter Property="BackgroundColor" Value="#a60000" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
     <Style TargetType="Button" x:Key="GhostButton">
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}" />
