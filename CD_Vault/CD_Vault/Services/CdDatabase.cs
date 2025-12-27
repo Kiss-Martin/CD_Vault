@@ -40,6 +40,14 @@ public class CdDatabase
         return await _connection.Table<CdItem>().CountAsync();
     }
 
+    public async Task<CdItem?> FindByTitleArtistAsync(string title, string artist)
+    {
+        await InitializeAsync();
+        return await _connection.Table<CdItem>()
+            .Where(item => item.Title == title && item.Artist == artist)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task AddAsync(CdItem item)
     {
         await InitializeAsync();

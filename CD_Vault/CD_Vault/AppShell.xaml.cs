@@ -1,5 +1,4 @@
 using CD_Vault.Pages;
-using Microsoft.Maui.Controls;
 
 namespace CD_Vault
 {

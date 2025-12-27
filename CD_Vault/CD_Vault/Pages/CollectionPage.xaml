@@ -40,13 +40,10 @@
                     <DataTemplate x:DataType="models:CdItem">
                         <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
                             <Grid Padding="16" ColumnDefinitions="60,*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="4">
-                                <Border StrokeThickness="0">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16"/>
-                                    </Border.StrokeShape>
-                                <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
-                                </Border>    
-                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
+                                <Border Grid.RowSpan="2" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0" StrokeShape="RoundRectangle 12" Padding="8" VerticalOptions="Center">
+                                    <Label Text="CD" FontAttributes="Bold" TextColor="{StaticResource SecondaryDarkText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
                                 <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
                                 <Button Grid.Column="2" Grid.RowSpan="2" Text="Törlés" Style="{StaticResource GhostButton}" Clicked="OnDeleteClicked" CommandParameter="{Binding .}" />
                             </Grid>

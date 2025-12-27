@@ -11,6 +11,10 @@ public partial class DiscoverPage : ContentPage
     private string _query = string.Empty;
     private bool _isSearching;
     private string _statusMessage = string.Empty;
+    private bool _isPlaceholderVisible = true;
+    private bool _isResultsVisible;
+    private bool _isAnimating;
+    private HashSet<string> _collectionKeys = new(StringComparer.OrdinalIgnoreCase);
 
     public DiscoverPage(AlbumSearchService searchService, CdDatabase database)
     {
@@ -34,6 +38,7 @@ public partial class DiscoverPage : ContentPage
 
             _query = value;
             OnPropertyChanged();
+            UpdatePlaceholderState();
         }
     }
 
@@ -67,6 +72,43 @@ public partial class DiscoverPage : ContentPage
         }
     }
 
+    public bool IsPlaceholderVisible
+    {
+        get => _isPlaceholderVisible;
+        private set
+        {
+            if (_isPlaceholderVisible == value)
+            {
+                return;
+            }
+
+            _isPlaceholderVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsResultsVisible
+    {
+        get => _isResultsVisible;
+        private set
+        {
+            if (_isResultsVisible == value)
+            {
+                return;
+            }
+
+            _isResultsVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadCollectionKeysAsync();
+        UpdatePlaceholderState();
+    }
+
     private async void OnSearchClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(Query))
@@ -84,6 +126,8 @@ public partial class DiscoverPage : ContentPage
             Results.Clear();
             foreach (var result in results)
             {
+                var key = BuildKey(result.Title, result.Artist);
+                result.IsInCollection = _collectionKeys.Contains(key);
                 Results.Add(result);
             }
 
@@ -108,18 +152,83 @@ public partial class DiscoverPage : ContentPage
             return;
         }
 
-        var item = new CdItem
+        if (album.IsInCollection)
         {
-            Title = album.Title,
-            Artist = album.Artist,
-            Genre = album.Genre,
-            Year = album.ReleaseDate.Year,
-            ArtworkUrl = album.ArtworkUrl,
-            AddedAt = DateTime.UtcNow,
-            Notes = "Hozzáadva a Felfedezés oldalról."
-        };
+            var existing = await _database.FindByTitleArtistAsync(album.Title, album.Artist);
+            if (existing is not null)
+            {
+                await _database.DeleteAsync(existing);
+            }
 
-        await _database.AddAsync(item);
-        StatusMessage = $"\"{album.Title}\" hozzáadva a gyűjteményhez.";
+            album.IsInCollection = false;
+            _collectionKeys.Remove(BuildKey(album.Title, album.Artist));
+            StatusMessage = $"\"{album.Title}\" eltávolítva a gyűjteményből.";
+        }
+        else
+        {
+            var item = new CdItem
+            {
+                Title = album.Title,
+                Artist = album.Artist,
+                Genre = album.Genre,
+                Year = album.ReleaseDate.Year,
+                ArtworkUrl = album.ArtworkUrl,
+                AddedAt = DateTime.UtcNow,
+                Notes = "Hozzáadva a Felfedezés oldalról."
+            };
+
+            await _database.AddAsync(item);
+            album.IsInCollection = true;
+            _collectionKeys.Add(BuildKey(album.Title, album.Artist));
+            StatusMessage = $"\"{album.Title}\" hozzáadva a gyűjteményhez.";
+        }
+
+        OnPropertyChanged(nameof(Results));
+    }
+
+    private async Task LoadCollectionKeysAsync()
+    {
+        var items = await _database.GetAllAsync();
+        _collectionKeys = items
+            .Select(item => BuildKey(item.Title, item.Artist))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    }
+
+    private void UpdatePlaceholderState()
+    {
+        var isPlaceholderVisible = string.IsNullOrWhiteSpace(Query);
+        IsPlaceholderVisible = isPlaceholderVisible;
+        IsResultsVisible = !isPlaceholderVisible;
+
+        if (IsPlaceholderVisible)
+        {
+            StartPlaceholderAnimation();
+        }
+        else
+        {
+            this.AbortAnimation("DiscSpin");
+            _isAnimating = false;
+        }
+    }
+
+    private void StartPlaceholderAnimation()
+    {
+        if (_isAnimating)
+        {
+            return;
+        }
+
+        _isAnimating = true;
+        var animation = new Animation(value => PlaceholderDisc.Rotation = value, 0, 360);
+        animation.Commit(this, "DiscSpin", 16, 2000, Easing.Linear, (_, _) =>
+        {
+            PlaceholderDisc.Rotation = 0;
+            _isAnimating = false;
+        }, () => IsPlaceholderVisible);
+    }
+
+    private static string BuildKey(string title, string artist)
+    {
+        return $"{title.Trim()}|{artist.Trim()}";
     }
 }

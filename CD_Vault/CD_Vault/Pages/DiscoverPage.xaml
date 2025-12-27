@@ -23,31 +23,40 @@
         <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" />
         <Label Grid.Row="3" Text="{Binding StatusMessage}" Style="{StaticResource SectionSubtitle}" />
 
-        <CollectionView Grid.Row="4" ItemsSource="{Binding Results}" SelectionMode="None">
+        <Grid Grid.Row="4">
+            <Border Style="{StaticResource CardBorder}" IsVisible="{Binding IsPlaceholderVisible}">
+                <VerticalStackLayout Padding="20" Spacing="12" HorizontalOptions="Center">
+                    <Border BackgroundColor="{StaticResource Secondary}" StrokeThickness="0" StrokeShape="RoundRectangle 60" Padding="24" HorizontalOptions="Center">
+                        <Grid>
+                            <BoxView x:Name="PlaceholderDisc" Color="{StaticResource Primary}" HeightRequest="80" WidthRequest="80" CornerRadius="40" />
+                            <BoxView Color="{StaticResource Secondary}" HeightRequest="28" WidthRequest="28" CornerRadius="14" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                    <Label Text="Kezdj el gépelni a kereséshez" Style="{StaticResource SectionSubtitle}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <CollectionView ItemsSource="{Binding Results}" SelectionMode="None" IsVisible="{Binding IsResultsVisible}">
             <CollectionView.EmptyView>
                 <Border Style="{StaticResource CardBorder}">
                     <VerticalStackLayout Padding="16" Spacing="6">
                         <Label Text="Indíts keresést a találatokhoz." Style="{StaticResource SectionSubtitle}" />
-                        
                     </VerticalStackLayout>
                 </Border>
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:AlbumSearchResult">
                     <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
-                        <Grid Padding="16" ColumnDefinitions="60,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
-                                <Border StrokeThickness="0">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="18"/>
-                                    </Border.StrokeShape>
-                                <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
-                                </Border>                               <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                        <Grid Padding="16" ColumnDefinitions="80,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+                            <Image Source="{Binding ArtworkUrl}" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Grid.RowSpan="2" />
+                            <Label Grid.Column="1" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}" Style="{StaticResource SectionSubtitle}" />
-                            <Button Grid.Column="2" Grid.RowSpan="2" Text="Mentés" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}" />
+                            <Button Grid.Column="2" Grid.RowSpan="2" Text="{Binding ActionLabel}" Style="{StaticResource SecondaryButton}" Clicked="OnAddFromSearchClicked" CommandParameter="{Binding .}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+            </CollectionView>
+        </Grid>
     </Grid>
 </ContentPage>

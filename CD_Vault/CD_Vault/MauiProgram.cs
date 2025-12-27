@@ -1,6 +1,5 @@
 ﻿using CD_Vault.Pages;
 using CD_Vault.Services;
-using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
