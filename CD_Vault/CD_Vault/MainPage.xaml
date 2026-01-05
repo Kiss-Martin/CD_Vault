@@ -18,8 +18,8 @@
                         <Label Text="Gyűjtemény összegzés" Style="{StaticResource SectionTitle}" />
                         <Label Text="Mentsd el kedvenceidet, jegyzetelj, tervezd a következő vásárlást." Style="{StaticResource SectionSubtitle}" />
                     </VerticalStackLayout>
-                    <Border Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="12" VerticalOptions="Start">
-                        <Label Text="{Binding CollectionCount}" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource SecondaryDarkText}" HorizontalTextAlignment="Center" />
+                    <Border Grid.Row="0" Grid.Column="1" BackgroundColor="DarkBlue" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="12" VerticalOptions="Start">
+                        <Label Text="{Binding CollectionCount}" FontSize="22" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                     </Border>
                     <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Lemezek száma" Style="{StaticResource SectionSubtitle}" />
                 </Grid>
@@ -29,8 +29,8 @@
                 <Grid Padding="20" RowDefinitions="Auto,Auto" RowSpacing="12">
                     <Label Text="Mit szeretnél tenni ma?" Style="{StaticResource SectionTitle}" />
                     <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
-                        <Button Text="Gyűjtemény" Clicked="OnCollectionClicked" />
-                        <Button Text="Felfedezés" Style="{StaticResource SecondaryButton}" Clicked="OnDiscoverClicked" Grid.Column="1" />
+                        <Button Text="Gyűjtemény" Background="Purple" Clicked="OnCollectionClicked" />
+                        <Button Text="Felfedezés" Background="Blue" Clicked="OnDiscoverClicked" Grid.Column="1" />
                     </Grid>
                 </Grid>
             </Border>

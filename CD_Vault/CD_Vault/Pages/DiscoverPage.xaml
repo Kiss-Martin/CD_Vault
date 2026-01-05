@@ -26,12 +26,16 @@
         <Grid Grid.Row="4">
             <Border Style="{StaticResource CardBorder}" IsVisible="{Binding IsPlaceholderVisible}">
                 <VerticalStackLayout Padding="20" Spacing="12" HorizontalOptions="Center">
-                    <Border BackgroundColor="{StaticResource Secondary}" StrokeThickness="0" StrokeShape="RoundRectangle 60" Padding="24" HorizontalOptions="Center">
-                        <Grid>
-                            <BoxView x:Name="PlaceholderDisc" Color="{StaticResource Primary}" HeightRequest="80" WidthRequest="80" CornerRadius="40" />
-                            <BoxView Color="{StaticResource Secondary}" HeightRequest="28" WidthRequest="28" CornerRadius="14" HorizontalOptions="Center" VerticalOptions="Center" />
-                        </Grid>
-                    </Border>
+                    <Border
+    x:Name="PlaceholderDisc"
+    BackgroundColor="{StaticResource Primary}"
+    HeightRequest="80"
+    WidthRequest="80"
+    StrokeThickness="0"
+    StrokeShape="RoundRectangle 40"
+    HorizontalOptions="Center"
+    VerticalOptions="Center"/>
+
                     <Label Text="Kezdj el gépelni a kereséshez" Style="{StaticResource SectionSubtitle}" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
             </Border>
