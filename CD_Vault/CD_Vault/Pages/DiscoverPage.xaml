@@ -26,15 +26,38 @@
         <Grid Grid.Row="4">
             <Border Style="{StaticResource CardBorder}" IsVisible="{Binding IsPlaceholderVisible}">
                 <VerticalStackLayout Padding="20" Spacing="12" HorizontalOptions="Center">
-                    <Border
-    x:Name="PlaceholderDisc"
-    BackgroundColor="{StaticResource Primary}"
-    HeightRequest="80"
-    WidthRequest="80"
-    StrokeThickness="0"
-    StrokeShape="RoundRectangle 40"
-    HorizontalOptions="Center"
-    VerticalOptions="Center"/>
+                    <Border x:Name="PlaceholderDisc"
+                            HeightRequest="96"
+                            WidthRequest="96"
+                            StrokeThickness="2"
+                            Stroke="{StaticResource Secondary}"
+                            BackgroundColor="{StaticResource Primary}"
+                            StrokeShape="RoundRectangle 48"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                        <!-- belső gyűrű -->
+                        <Border
+                            HeightRequest="64"
+                            WidthRequest="64"
+                            StrokeThickness="1"
+                            Stroke="{StaticResource Secondary}"
+                            BackgroundColor="Transparent"
+                            StrokeShape="RoundRectangle 32"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                            <!-- középső lyuk -->
+                            <Border
+                            HeightRequest="18"
+                            WidthRequest="18"
+                            BackgroundColor="{StaticResource Secondary}"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 9"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                        </Border>
+                    </Border>
 
                     <Label Text="Kezdj el gépelni a kereséshez" Style="{StaticResource SectionSubtitle}" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
