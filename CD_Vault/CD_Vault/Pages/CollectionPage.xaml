@@ -27,7 +27,7 @@
 
             <Label Text="Mentett CD-k" Style="{StaticResource SectionTitle}" />
 
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged" BackgroundColor="Transparent">
                 <CollectionView.EmptyView>
                     <Border Style="{StaticResource CardBorder}">
                         <VerticalStackLayout Padding="16" Spacing="6">

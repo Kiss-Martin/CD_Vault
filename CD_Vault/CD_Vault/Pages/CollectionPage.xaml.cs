@@ -173,24 +173,11 @@ public partial class CollectionPage : ContentPage
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is not CdItem item)
-        {
             return;
-        }
 
-        var yearText = item.Year > 0 ? item.Year.ToString() : "Ismeretlen";
-        var genreText = string.IsNullOrWhiteSpace(item.Genre) ? "Nincs megadva" : item.Genre;
-        var notesText = string.IsNullOrWhiteSpace(item.Notes) ? "Nincs megjegyzés" : item.Notes;
+        if (sender is CollectionView cv)
+            cv.SelectedItem = null;
 
-        var message = $"Előadó: {item.Artist}\n" +
-                      $"Műfaj: {genreText}\n" +
-                      $"Kiadás éve: {yearText}\n" +
-                      $"Megjegyzés: {notesText}";
-
-        await DisplayAlert(item.Title, message, "OK");
-
-        if (sender is CollectionView collectionView)
-        { 
-            collectionView.SelectedItem = null;
-        }
+        await Navigation.PushAsync(new AlbumDetailsPage(item));
     }
 }

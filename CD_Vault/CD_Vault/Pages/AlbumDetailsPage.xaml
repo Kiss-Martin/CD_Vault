@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CD_Vault.Pages.AlbumDetailsPage"
+    BackgroundColor="{StaticResource Primary}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Frame CornerRadius="26"
+                   IsClippedToBounds="True"
+                   HasShadow="True"
+                   Padding="0"
+                   BackgroundColor="{StaticResource Secondary}">
+                <Image Source="{Binding ArtworkUrl}"
+                       Aspect="AspectFill"
+                       HeightRequest="320" />
+            </Frame>
+
+            <Label Text="{Binding Title}"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource PrimaryDarkText}" />
+
+            <Label Text="{Binding Artist}"
+                   FontSize="18"
+                   TextColor="{StaticResource SecondaryDarkText}" />
+
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+
+                <Label Text="Műfaj:" Grid.Row="0" TextColor="{StaticResource SecondaryDarkText}" />
+                <Label Text="{Binding Genre}" Grid.Row="0" Grid.Column="1"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+
+                <Label Text="Év:" Grid.Row="1" TextColor="{StaticResource SecondaryDarkText}" />
+                <Label Text="{Binding Year}" Grid.Row="1" Grid.Column="1"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+
+                <Label Text="Megjegyzés: " Grid.Row="2" TextColor="{StaticResource SecondaryDarkText}" />
+                <Label Text="{Binding Notes}" Grid.Row="2" Grid.Column="1"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
